@@ -7,7 +7,9 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-	
+<!-- Carregando o arquivo de propriedades -->
+<context:property-placeholder location="classpath:sport.properties"/>
+
 <!-- Define your beans here -->   
 	<!--  Definindo dependência  -->
 	<bean id="myFortune"
@@ -24,8 +26,8 @@
    		class="br.com.ilovecode.springdemo.CricketCoach">
    		<!--  Definindo setter injection -->
    		<property name="fortuneService" ref="myFortune"></property>
-   		<property name="emailAddress" value="teste@dominio.com"></property>
-   		<property name="team" value="Nome do Time"></property>
+   		<property name="emailAddress" value="${foo.email}"></property>
+   		<property name="team" value="${foo.team}"></property>
    	</bean>
    
 </beans>

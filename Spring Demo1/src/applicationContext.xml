@@ -16,8 +16,16 @@
     
    <bean id="myCoach"
    		class="br.com.ilovecode.springdemo.TrackCoach">
-  	<!-- Definindo a injeção no construtor -->
+  		<!-- Definindo a injeção no construtor -->
 		<constructor-arg ref="myFortune" />
    	</bean>  	
+   	
+   	<bean id="myCricketCoach"
+   		class="br.com.ilovecode.springdemo.CricketCoach">
+   		<!--  Definindo setter injection -->
+   		<property name="fortuneService" ref="myFortune"></property>
+   		<property name="emailAddress" value="teste@dominio.com"></property>
+   		<property name="team" value="Nome do Time"></property>
+   	</bean>
    
 </beans>

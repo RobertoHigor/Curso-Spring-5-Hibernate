@@ -7,11 +7,27 @@ import org.springframework.stereotype.Component;
 public class TennisCoach implements Coach {
 	private FortuneService fortuneService;
 	
-	// Spring irá procurar um componente que implementa essa interface
+	public TennisCoach() {
+		System.out.println(">> TennisCoach:dentro do construtor padrão");
+	}
+	
 	@Autowired
+	public void setFortuneService(FortuneService theFortuneService) {
+		System.out.println(">> TennisCoach: Executando setFortuneService");
+		fortuneService = theFortuneService;
+			}
+	
+	@Autowired
+	public void doCrazyStuff(FortuneService theFortuneService) {
+		System.out.println(">> TennisCoach: Executando doCrazyStuff");
+		fortuneService = theFortuneService;
+	}
+	
+	// Spring irá procurar um componente que implementa essa interface
+	/*@Autowired
 	public TennisCoach(FortuneService theFortuneService) {
 		this.fortuneService = theFortuneService;
-	}
+	}*/
 
 	@Override
 	public String getDailyWorkout() {

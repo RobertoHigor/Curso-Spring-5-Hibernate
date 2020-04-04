@@ -5,13 +5,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TennisCoach implements Coach {
+	@Autowired
 	private FortuneService fortuneService;
 	
 	public TennisCoach() {
 		System.out.println(">> TennisCoach:dentro do construtor padrão");
 	}
 	
-	@Autowired
+	/*@Autowired
 	public void setFortuneService(FortuneService theFortuneService) {
 		System.out.println(">> TennisCoach: Executando setFortuneService");
 		fortuneService = theFortuneService;
@@ -21,7 +22,7 @@ public class TennisCoach implements Coach {
 	public void doCrazyStuff(FortuneService theFortuneService) {
 		System.out.println(">> TennisCoach: Executando doCrazyStuff");
 		fortuneService = theFortuneService;
-	}
+	}*/
 	
 	// Spring irá procurar um componente que implementa essa interface
 	/*@Autowired

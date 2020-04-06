@@ -1,0 +1,11 @@
+In my opinion, there's no need to have a clustered HUD in this game. Most of the things are already shown by the level design/game design. So why, in 2020, the Battlefield series doesnt already have a modular HUD?
+
+Things they could implement
+- The game could show the objectives by pressing TAB
+- You still need subtitle to hear other languages translations
+- A option to disable QTE or to show them
+- Enable MENU
+
+Things the game already does
+- The characters already guide you through the stage.
+- The level design shows you the right way

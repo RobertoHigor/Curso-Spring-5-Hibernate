@@ -14,7 +14,7 @@ public class SwimCoach implements Coach{
 
 	@Override
 	public String getDailyFortune() {
-		return null;
+		return fortuneService.getFortune();
 	}
 
 }

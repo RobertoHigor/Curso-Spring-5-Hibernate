@@ -40,7 +40,6 @@ public class CricketCoach implements Coach {
 
 	@Override
 	public String getDailyFortune() {
-		// TODO Auto-generated method stub
 		return fortuneService.getFortune();
 	}
 	

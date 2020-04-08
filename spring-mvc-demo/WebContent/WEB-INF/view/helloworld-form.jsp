@@ -4,7 +4,7 @@
 	<title>Hello World - Input FOrm</title>
 </head>
 <body>
-	<form action="processFormModel" method="GET">
+	<form action="processFormParam" method="GET">
 		<input type="text" name="studentName"
 			placeholder="Qual é o seu nome?"/>
 		

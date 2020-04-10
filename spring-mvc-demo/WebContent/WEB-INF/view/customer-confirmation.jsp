@@ -5,7 +5,8 @@
 	<title>Student Confirmation Form</title>
 </head>
 <body>
-	The customer is confirmed: ${customer.firstName} ${customer.lastName}
+	The customer is confirmed: ${customer.firstName} ${customer.lastName} <br>
+	Free Passes: ${customer.freePasses}
 	<br>
 </body>
 

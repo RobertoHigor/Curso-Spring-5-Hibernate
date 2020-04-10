@@ -24,6 +24,12 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<!-- Carregar recurso com mensagens customizdas-->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		
+		<property name="basenames" value="resources/messages" />
+	</bean>
 </beans>
 
 

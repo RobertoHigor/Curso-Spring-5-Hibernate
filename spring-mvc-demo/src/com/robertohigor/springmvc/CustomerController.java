@@ -47,6 +47,8 @@ public class CustomerController {
 	public String processForm(@Valid @ModelAttribute("customer") Customer theCustomer, BindingResult theBindingResult) {
 		
 		System.out.println("Last Name: |" + theCustomer.getLastName() + "|"); // O | é para verificar se tem espaços
+		System.out.println("Binding result: " + theBindingResult);
+		System.out.println("\n\n\n");
 		// Se o resultado possui algum erro, retornar para a mesma página.
 		if (theBindingResult.hasErrors()) {
 			return "customer-form";

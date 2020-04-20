@@ -1,10 +1,16 @@
 package com.robertohigor.hibernate.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.robertohigor.hibernate.demo.DateUtils;
 
 @Entity
 //@Table(name="student")
@@ -20,16 +26,31 @@ public class Student {
 	@Column(name="last_name")
 	private String lastName;
 	
+	@Column(name="date_of_birth")
+	@Temporal(TemporalType.DATE)
+	private Date dateOfBirth;
+	
 	@Column(name="email")
 	private String email;
 	
+	// O Hibernate necessita de um construtor vazio
 	public Student() {		
 	}
-
+	
 	public Student(String firstName, String lastName, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
+	}
+
+
+
+	public Student(String firstName, String lastName, String email, Date dateOfBirth) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 	}
 
@@ -67,7 +88,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+		return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", dateOfBirth=" + DateUtils.formatDate(dateOfBirth) + "]";
 	}
 	
 	

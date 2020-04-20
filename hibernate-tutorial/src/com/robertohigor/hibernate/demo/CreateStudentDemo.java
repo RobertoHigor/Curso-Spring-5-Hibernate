@@ -1,5 +1,8 @@
 package com.robertohigor.hibernate.demo;
 
+import java.text.ParseException;
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -18,7 +21,12 @@ public class CreateStudentDemo {
 		try {
 			// Utilizar o session object para salvar o Java Object
 			System.out.println("Criando um novo objeto Student...");
-			Student tempStudent = new Student("Paul", "Wall", "exemplo@email.com");
+			
+			// Utilizando a classe DateUtils
+			String theDateOfBirthStr = "31/12/1998";
+			Date theDateOfBirth = DateUtils.parseDate(theDateOfBirthStr);
+			
+			Student tempStudent = new Student("Paul", "Wall", "exemplo@email.com", theDateOfBirth);
 			
 			// Iniciando a transação e salvando o objeto
 			session.beginTransaction();
@@ -28,6 +36,8 @@ public class CreateStudentDemo {
 			// Commit na transação
 			session.getTransaction().commit();
 			System.out.println("Done");
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}finally {
 			factory.close();
 		}

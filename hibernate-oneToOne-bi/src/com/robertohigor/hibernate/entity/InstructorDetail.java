@@ -28,7 +28,11 @@ public class InstructorDetail {
 	// na classe "Instructor" e obtendo as informações do @JoinColumn
 	
 	// cascade serve para realizar um "cascade" das operações para o "Instructor" associado.
-	@OneToOne(mappedBy="instructorDetail", cascade=CascadeType.ALL)
+	// Nesse caso, está sendo utilizado todos os tipos exceto REMOVE
+	@OneToOne(mappedBy="instructorDetail", cascade= {CascadeType.DETACH,
+													CascadeType.MERGE,
+													CascadeType.PERSIST,
+													CascadeType.REFRESH})
 	private Instructor instructor;
 
 	public Instructor getInstructor() {

@@ -30,7 +30,12 @@ public class GetInstructorDetail {
 		// Commit na transação
 			session.getTransaction().commit();
 			System.out.println("Done");
-		} finally {
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			// Lidar com o connection leak
+			session.close();
 			factory.close();
 		}
 	}

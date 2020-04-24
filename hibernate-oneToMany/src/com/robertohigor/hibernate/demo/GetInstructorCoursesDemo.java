@@ -8,7 +8,7 @@ import com.robertohigor.hibernate.entity.Course;
 import com.robertohigor.hibernate.entity.Instructor;
 import com.robertohigor.hibernate.entity.InstructorDetail;
 
-public class CreateCoursesDemo {
+public class GetInstructorCoursesDemo {
 	public static void main (String[] args) {
 		SessionFactory factory = new Configuration()
 								.configure("hibernate.cfg.xml") // O nome é opcional

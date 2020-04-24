@@ -19,24 +19,27 @@ public class CreateInstructorDemo {
 
 		Session session = factory.getCurrentSession();
 		
-		try {			
-		// Iniciando a transação
-			session.beginTransaction();	
+		try {
 			
 		//Criar e associar os objetos
-			int theId = 1;
-			Instructor tempInstructor = session.get(Instructor.class, theId);
+			Instructor tempInstructor = new Instructor("Mike", "Wazowski", "marby@luv2code.com");
+			InstructorDetail tempInstructorDetail = new InstructorDetail(
+					"http://luv2code.com/youtube",
+					"Scare");
+			// Associando o instructor detail na memória
+			tempInstructor.setInstructorDetail(tempInstructorDetail);
 			
-			Course tempCourse1 = new Course("Air Guitar");
-			Course tempCourse2 = new Course("Paintball Masterclass");
+		// Inicando a transação
+			session.beginTransaction();
+
+			/*
+			 * Salvando o Instructor
+			 * Pelo fato dos objetos estarem relacionados, isso também irá salvar
+			 * o Instructor Detail por conta do Cascade
+			 */
+			System.out.println("Salvando Instructor: " + tempInstructor);
+			session.save(tempInstructor);
 			
-			tempInstructor.add(tempCourse1);
-			tempInstructor.add(tempCourse2);
-			
-			session.save(tempCourse1);
-			session.save(tempCourse2);
-			
-		// Finalizando a transação
 			
 			session.getTransaction().commit();
 			System.out.println("Done");

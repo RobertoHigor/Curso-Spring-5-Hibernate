@@ -3,6 +3,7 @@ package com.robertohigor.hibernate.demo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import com.robertohigor.hibernate.entity.Course;
 import com.robertohigor.hibernate.entity.Instructor;
@@ -23,9 +24,21 @@ public class FetchJoinDemo {
 		// Iniciando a transação
 			session.beginTransaction();	
 			
+		// option 2: Hibernate Query with HQL
+			
 		// Retornar um Instrutor e seus cursos
 			int theId = 1;
-			Instructor tempInstructor = session.get(Instructor.class, theId);
+		
+			// Query para retornar o instrutor e os cursos
+			Query<Instructor> query = 
+					session.createQuery("select i from Instructor i "
+							+ "JOIN FETCH i.courses "
+							+ "where i.id=:theInstructorId",
+							Instructor.class);
+			
+			// Definir os parâmetros da query
+			query.setParameter("theInstructorId", theId);
+			Instructor tempInstructor = query.getSingleResult();
 			
 			// No Lazy, ele irá realizar um select de Instructor e InstructorDetails
 			System.out.println("Meu app: Instructor: " + tempInstructor);

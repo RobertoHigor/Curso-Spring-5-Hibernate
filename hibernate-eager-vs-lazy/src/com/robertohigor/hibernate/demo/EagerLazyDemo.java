@@ -30,6 +30,7 @@ public class EagerLazyDemo {
 			// No Lazy, ele irá realizar um select de Instructor e InstructorDetails
 			System.out.println("Meu app: Instructor: " + tempInstructor);
 			
+			// Option 1: session.get
 			// Retornando cursos antes da sessão fechar
 			System.out.println("Meu app: Courses: " + tempInstructor.getCourses());
 			

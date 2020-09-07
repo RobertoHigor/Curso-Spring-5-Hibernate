@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query; // Import a partir do Hibernate 5.2
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.robertohigor.entity.Customer;
 
@@ -17,8 +16,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	@Autowired // Injetar session factory
 	private SessionFactory sessionFactory;
 
-	@Override
-	@Transactional // Para que o Spring gerencie as transações (begin e end)
+	@Override // Foi removido a @Transactional por utilizar service layer (transferida para lá)	
 	public List<Customer> getCustomers() {
 		// Pegar a sessão hibernate atual
 		Session currentSession = sessionFactory.getCurrentSession();

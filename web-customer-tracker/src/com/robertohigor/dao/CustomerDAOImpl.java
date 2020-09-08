@@ -23,7 +23,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 		
 		// Criar e executar um query
 		Query<Customer> theQuery =
-				currentSession.createQuery("from Customer", Customer.class);
+				currentSession.createQuery("from Customer order by lastName",
+											Customer.class);
 		List<Customer> customers = theQuery.getResultList();
 		
 		// Retornar o resultado
@@ -34,11 +35,21 @@ public class CustomerDAOImpl implements CustomerDAO {
 	@Override
 	public Object saveCustomer(Customer theCustomer) {
 		// Pegar a sessão hibernate atual
-		Session currentSession = sessionFactory.getCurrentSession();
-		
-		// Salvar
-		currentSession.save(theCustomer);
+		Session currentSession = sessionFactory.getCurrentSession();		
+		// Salvar ou atualizar.
+		// Caso exista algum valor na chave primária, é executado o método de atualizar.
+		currentSession.saveOrUpdate(theCustomer);
 		return null;
+	}
+
+
+	@Override
+	public Customer getCustomer(int theId) {
+		// Pegar a sessão hibernate e depois retornar os dados do banco de dados
+		Session currentSession = sessionFactory.getCurrentSession();		
+		Customer theCustomer = currentSession.get(Customer.class, theId);
+		
+		return theCustomer;
 	}
 
 }

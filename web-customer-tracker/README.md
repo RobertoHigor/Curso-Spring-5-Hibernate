@@ -1,4 +1,4 @@
-# Aplicação WEB utilizando SPring MVC e Hibernate
+# Aplicação WEB utilizando Spring MVC e Hibernate
 
 Primeiro projeto WEB do curso utilizando os conhecimentos adquiridos de Spring MVC e Hibernate.
 

@@ -60,5 +60,11 @@ public class CustomerController {
 		// Redirecionar para o formulário populado com a model
 		return "customer-form";
 	}
+	
+	@GetMapping("/delete")
+	public String delete(@RequestParam("customerId") int theId) {
+		customerService.deleteCustomer(theId);
+		return "redirect:/customer/list";
+	}
 }
 

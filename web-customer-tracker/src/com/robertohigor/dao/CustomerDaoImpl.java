@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import com.robertohigor.entity.Customer;
 
-@Repository // Annotation para DAO. Agora o spring consgue encontrar esse DAO.
-public class CustomerDAOImpl implements CustomerDAO {
-	
+@Repository
+public class CustomerDaoImpl implements CustomerDAO {
+
 	@Autowired // Injetar session factory
 	private SessionFactory sessionFactory;
 
@@ -50,6 +50,19 @@ public class CustomerDAOImpl implements CustomerDAO {
 		Customer theCustomer = currentSession.get(Customer.class, theId);
 		
 		return theCustomer;
+	}
+
+	@Override
+	public void deleteCustomer(int theId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		// Deletar o objeto com a chave primária
+		@SuppressWarnings("rawtypes")
+		Query theQuery = 
+		currentSession.createQuery("delete from Customer where id=:customerId");
+		theQuery.setParameter("customerId", theId);
+		
+		theQuery.executeUpdate();
 	}
 
 }

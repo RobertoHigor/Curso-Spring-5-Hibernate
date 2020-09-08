@@ -30,15 +30,25 @@
 				
 				<!-- Realizer um loop e imprimir os customers -->
 				<c:forEach var="tempCustomer" items="${customers}">
-					<!-- Criar um botão de update com o id do customer-->
+					<!-- Criar um link de update com o id do customer-->
 					<c:url var="updateLink" value="/customer/showFormForUpdate">
 						<c:param name="customerId" value="${tempCustomer.id}" />
+					</c:url>					
+					<!-- Criar um link de deletar com o id do customer-->
+					<c:url var="deleteLink" value="/customer/delete">
+						<c:param name="customerId" value="${tempCustomer.id}" />
 					</c:url>
+					
 					<tr>
 						<td> ${tempCustomer.firstName} </td>
 						<td> ${tempCustomer.lastName} </td>
 						<td> ${tempCustomer.email} </td>
-						<td><a href="${updateLink}">Update</a></td>
+						<td>
+							<a href="${updateLink}">Update</a>
+							|
+							<a href="${deleteLink}"
+							onclick="if(!(confirm('Tem certez que deseja remover esse Customer?'))) return false" >Delete</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>

@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +16,18 @@
 	
 	<div id="container">
 		<div id="content">
-		<!--  Add Customer Button -->
-		<input type="button" value="Add Customer"
-				onclick="window.location.href='showFormForAdd'; return false;"
-				class = "add-button"
-		/>
+			<!--  Add Customer Button -->
+			<input type="button" value="Add Customer"
+					onclick="window.location.href='showFormForAdd'; return false;"
+					class = "add-button"
+			/>
+	         <!--  Botão de busca, acionando a rota /search no controller. -->
+	         <form:form action="search" method="GET">
+	         	Search customer: <input type="text" name="theSearchName" />
+	              
+	             <input type="submit" value="Search" class="add-button" />
+	         </form:form>
+	         
 			<table>
 				<tr>
 					<th>First Name</th>

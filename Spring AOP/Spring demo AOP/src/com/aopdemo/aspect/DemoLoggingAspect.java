@@ -1,9 +1,13 @@
 package com.aopdemo.aspect;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import com.aopdemo.Account;
 
 @Aspect // Para que a classe escute as chamadas
 @Component
@@ -32,8 +36,28 @@ public class DemoLoggingAspect {
 	 */
 	
 	@Before("com.aopdemo.aspect.AopExpressions.ForDaoPackageNoGetterSetter()") // Match em qualquer método do pacote dao
-	public void beforeAddAccountAdvice() {
+	public void beforeAddAccountAdvice(JoinPoint theJoinPoint) { // Passando o argumento JoinPoint para pegar dados do método
 		System.out.println("\n=====>>> performing logging");
+		
+		// Exibir a assinatura do método com joinPoint
+		MethodSignature methodSig = (MethodSignature) theJoinPoint.getSignature();
+		System.out.println("Method: " + methodSig);
+		
+		// Exibir os argumentos do método
+		Object[] args = theJoinPoint.getArgs();
+		
+		for (Object tempArg : args) {
+			System.out.println(tempArg);
+			
+			if (tempArg instanceof Account) {
+				// Downcast e exibir dados da conta
+				Account theAccount = (Account) tempArg;
+				
+				System.out.println("account name:" + theAccount.getName());
+				System.out.println("account level:" + theAccount.getLevel());
+				
+			}
+		}
 	}
 	
 

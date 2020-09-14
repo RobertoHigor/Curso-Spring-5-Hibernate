@@ -19,8 +19,10 @@ public class MainDemoApp {
 		AccountDAO theAccountDAO = 
 				context.getBean("accountDAO", AccountDAO.class);
 		
+		// Criando Account
 		Account theAccount = new Account();
-		
+		theAccount.setName("Foo");
+		theAccount.setLevel("Platinum");
 		
 		// Chamadas a métodos
 		

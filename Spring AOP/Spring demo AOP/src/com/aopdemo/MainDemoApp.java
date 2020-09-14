@@ -22,9 +22,17 @@ public class MainDemoApp {
 		Account theAccount = new Account();
 		
 		
-		// Chamar o método
+		// Chamadas a métodos
+		
+		// AccountDAO
 		theAccountDAO.addAccount(theAccount, true);
 		theAccountDAO.doWork();
+		
+		// Getters e Setters
+		theAccountDAO.setName("foobar");
+		theAccountDAO.setServiceCode("silver");
+		String name = theAccountDAO.getName();
+		String code = theAccountDAO.getServiceCode();
 		
 		theMembershipDAO.addSillyMember();
 		theMembershipDAO.goToSleep();

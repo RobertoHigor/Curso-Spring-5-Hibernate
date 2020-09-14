@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -80,6 +81,22 @@ public class DemoLoggingAspect {
 		System.out.println("\n=====>>> result é: " + result);
 		
 	}
+	
+	// Após uma exceção
+	@AfterThrowing(
+			pointcut="execution(* com.aopdemo.dao.AccountDAO.findAccounts(..))",
+			throwing="theExc")	
+	public void afterThrowingFindAccountsAdvice(JoinPoint theJoinPoint, Throwable theExc) {
+		
+		// Exibir qual método para qual método o advice está sendo executado
+		String method =  theJoinPoint.getSignature().toShortString();
+		System.out.println("\n=====>>> Executando @AfterThrowing no método: " + method);
+		
+		// Realizando um log da exceção
+		System.out.println("\n=====>>> A exceção é: " + theExc);
+	}
+	
+	// Helpers
 
 	private void convertAccountNamesToUpperCase(List<Account> result) {
 		for (Account tmp : result) {

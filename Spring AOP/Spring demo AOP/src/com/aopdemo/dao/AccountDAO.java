@@ -14,7 +14,13 @@ public class AccountDAO {
 	private String serviceCode;
 	
 	// Criar lista de Accounts e retornar
-	public List<Account> findAccounts() {
+	public List<Account> findAccounts(boolean tripWire) {
+		// Simular Exception
+		if (tripWire) {
+			throw new RuntimeException("Simulated exception");
+		}
+		
+		// Criar lista
 		List<Account> myAccounts = new ArrayList<>();
 		
 		Account temp1 = new Account("John", "Silver");

@@ -2,11 +2,12 @@ package com.aopdemo.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect // Para que a classe escute as chamadas
 @Component
+@Order(2)
 public class DemoLoggingAspect {
 	// Aqui são colocados os advices
 	// Cada advice recebe como argumento a assinatura de qual método eles irão monitorar.
@@ -30,31 +31,12 @@ public class DemoLoggingAspect {
 	* @Before("execution(* add*(..))") /
 	 */
 	
-	// Match em todas os métodos do pacote dao
-	@Pointcut("execution(* com.aopdemo.dao.*.*(..))")
-	public void forDaoPackage() {} // O nome do método aponta para a expressão acima.
-	
-	/*
-	 *  Match em getters e setters
-	 */
-	@Pointcut("execution(* com.aopdemo.dao.*.get*(..))")
-	private void getter() {}
-	
-	@Pointcut("execution(* com.aopdemo.dao.*.set*(..))")
-	private void setter() {}
-	
-	// Combinando: incluir pacote e excluir getters e setters
-	@Pointcut("forDaoPackage() && !(getter() || setter())")
-	private void ForDaoPackageNoGetterSetter(){}
-	
-	
-	@Before("ForDaoPackageNoGetterSetter()") // Match em qualquer método do pacote dao
+	@Before("com.aopdemo.aspect.AopExpressions.ForDaoPackageNoGetterSetter()") // Match em qualquer método do pacote dao
 	public void beforeAddAccountAdvice() {
-		System.out.println("\n=====>>> Executing @Before advice");
+		System.out.println("\n=====>>> performing logging");
 	}
 	
-	@Before("ForDaoPackageNoGetterSetter()")
-	public void performApiAnalytics() {
-		System.out.println("\n=====>>> Performing API analytics");
-	}
+
+	
+	
 }

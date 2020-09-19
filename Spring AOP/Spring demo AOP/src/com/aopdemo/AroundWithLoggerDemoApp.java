@@ -1,10 +1,16 @@
 package com.aopdemo;
 
+import java.util.logging.Logger;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.aopdemo.service.TrafficFortuneService;
 
-public class AroundDemoApp {
+public class AroundWithLoggerDemoApp {
+
+	// Utilizando a API de logging do Java.
+	// Como boa prática, se utiliza o nome da própria classe.
+	private static Logger myLogger = Logger.getLogger(AroundWithLoggerDemoApp.class.getName());
 	
 	public static void main(String[] args) {
 		// Configuração
@@ -14,13 +20,13 @@ public class AroundDemoApp {
 		TrafficFortuneService theFortuneService = 
 				context.getBean("trafficFortuneService", TrafficFortuneService.class);
 			
-		System.out.println("\nMain Program: AroundDemoApp");		
-		System.out.println("Calling getFortune");
+		myLogger.info("\nMain Program: AroundDemoApp");		
+		myLogger.info("Calling getFortune");
 		
 		String data = theFortuneService.getFortune();
 		
-		System.out.println("\nMy fortune is: "+ data);
-		System.out.println("Finished");
+		myLogger.info("\nMy fortune is: "+ data);
+		myLogger.info("Finished");
 		context.close();
 
 	}

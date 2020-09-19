@@ -1,6 +1,7 @@
 package com.aopdemo.aspect;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -20,6 +21,8 @@ import com.aopdemo.Account;
 @Component
 @Order(2)
 public class DemoLoggingAspect {
+	
+	private Logger myLogger = Logger.getLogger(getClass().getName());
 	// Aqui são colocados os advices
 	// Cada advice recebe como argumento a assinatura de qual método eles irão monitorar.
 	
@@ -44,24 +47,25 @@ public class DemoLoggingAspect {
 	
 	@Before("com.aopdemo.aspect.AopExpressions.ForDaoPackageNoGetterSetter()") // Match em qualquer método do pacote dao
 	public void beforeAddAccountAdvice(JoinPoint theJoinPoint) { // Passando o argumento JoinPoint para pegar dados do método
-		System.out.println("\n=====>>> performing logging");
+		myLogger.info("\n=====>>> performing logging");
 		
 		// Exibir a assinatura do método com joinPoint
 		MethodSignature methodSig = (MethodSignature) theJoinPoint.getSignature();
-		System.out.println("Method: " + methodSig);
+		myLogger.info("Method: " + methodSig);
 		
 		// Exibir os argumentos do método
 		Object[] args = theJoinPoint.getArgs();
 		
 		for (Object tempArg : args) {
-			System.out.println(tempArg);
+			// Foi adicionado o toString pois o info() não aceita Object.
+			myLogger.info(tempArg.toString()); 
 			
 			if (tempArg instanceof Account) {
 				// Downcast e exibir dados da conta
 				Account theAccount = (Account) tempArg;
 				
-				System.out.println("account name:" + theAccount.getName());
-				System.out.println("account level:" + theAccount.getLevel());
+				myLogger.info("account name:" + theAccount.getName());
+				myLogger.info("account level:" + theAccount.getLevel());
 				
 			}
 		}
@@ -75,13 +79,13 @@ public class DemoLoggingAspect {
 		
 		// Exibir qual método para qual método o advice está sendo executado
 		String method =  theJoinPoint.getSignature().toShortString();
-		System.out.println("\n=====>>> Executando @AfterReturning no método: " + method);
+		myLogger.info("\n=====>>> Executando @AfterReturning no método: " + method);
 	
 		// Pós processar os dados (modifica-lo)
 		convertAccountNamesToUpperCase(result);
 		
 		// Exibir os resultados do método chamado
-		System.out.println("\n=====>>> result é: " + result);
+		myLogger.info("\n=====>>> result é: " + result);
 		
 	}
 	
@@ -93,10 +97,10 @@ public class DemoLoggingAspect {
 		
 		// Exibir qual método para qual método o advice está sendo executado
 		String method =  theJoinPoint.getSignature().toShortString();
-		System.out.println("\n=====>>> Executando @AfterThrowing no método: " + method);
+		myLogger.info("\n=====>>> Executando @AfterThrowing no método: " + method);
 		
 		// Realizando um log da exceção
-		System.out.println("\n=====>>> A exceção é: " + theExc);
+		myLogger.info("\n=====>>> A exceção é: " + theExc);
 	}
 	
 	// Finally. Após a execução de um método, tanto no sucesso quanto em uma exception.
@@ -106,7 +110,7 @@ public class DemoLoggingAspect {
 	public void afterFinallyFindAccountsAdvice(JoinPoint theJoinPoint) {
 		// Exibir qual método para qual método o advice está sendo executado
 		String method =  theJoinPoint.getSignature().toShortString();
-		System.out.println("\n=====>>> Executando @After no método: " + method);
+		myLogger.info("\n=====>>> Executando @After no método: " + method);
 	}
 	
 	// @Around advice
@@ -115,7 +119,7 @@ public class DemoLoggingAspect {
 		
 		// Exibir o método em que está sendo executado o advise
 		String method =  theProceedingJoin.getSignature().toShortString();
-		System.out.println("\n=====>>> Executando @Around no método: " + method);
+		myLogger.info("\n=====>>> Executando @Around no método: " + method);
 		
 		// Iniciar o cronômetro
 		long begin = System.currentTimeMillis();
@@ -126,7 +130,7 @@ public class DemoLoggingAspect {
 		//Finalizar cronômetro
 		long end = System.currentTimeMillis();
 		long duration = end - begin;
-		System.out.println("\n=====> Duration: " + duration / 1000.0 + " seconds");
+		myLogger.info("\n=====> Duration: " + duration / 1000.0 + " seconds");
 		
 		// Retornar para quem chamou o método
 		return result;

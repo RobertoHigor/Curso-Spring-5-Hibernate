@@ -3,6 +3,7 @@ package com.aopdemo.aspect;
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -94,6 +95,15 @@ public class DemoLoggingAspect {
 		
 		// Realizando um log da exceção
 		System.out.println("\n=====>>> A exceção é: " + theExc);
+	}
+	
+	// Finally. Após a execução de um método, tanto no sucesso quanto em uma exception.
+	// Esse Advice é executado antes do @AfterThrowing
+	@After("execution(* com.aopdemo.dao.AccountDAO.findAccounts(..))")
+	public void afterFinallyFindAccountsAdvice(JoinPoint theJoinPoint) {
+		// Exibir qual método para qual método o advice está sendo executado
+		String method =  theJoinPoint.getSignature().toShortString();
+		System.out.println("\n=====>>> Executando @After no método: " + method);
 	}
 	
 	// Helpers

@@ -135,8 +135,12 @@ public class DemoLoggingAspect {
 			// log the exception
 			myLogger.warning(e.getMessage());
 			
+			
 			// Retornar uma mensagem customizada para o usuário
-			result = "Major accident! But no worries";
+			//result = "Major accident! But no worries";
+			
+			// Rejogando exception
+			throw e;
 		}
 		
 		//Finalizar cronômetro

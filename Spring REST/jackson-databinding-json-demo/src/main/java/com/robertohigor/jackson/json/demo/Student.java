@@ -2,6 +2,10 @@ package com.robertohigor.jackson.json.demo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/*
+ * IgnoreProperties servem para evitar erros no sistema caso novas propriedades sejam adicionadas ao JSON,
+ * não sendo necessário atualizar a classe para que tudo volte a funcionar.
+ */
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Student {
 	private int id;

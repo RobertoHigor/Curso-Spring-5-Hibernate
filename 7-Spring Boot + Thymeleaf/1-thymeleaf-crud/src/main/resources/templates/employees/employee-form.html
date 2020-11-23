@@ -22,6 +22,9 @@
 	<form action="#" th:action="@{/employees/save}"
     				th:object="${employee}" method="POST">
     				
+    	<!-- Campo invisível do id utilizado no update. Serve para dizer qual employee modificar. -->    	
+    	<input type="hidden" th:field="*{id}">
+    	
 	    <input type="text" th:field="*{firstName}" placeholder="First Name"
 	        class="form-control mb-4 col-4">
 	    <input type="text" th:field="*{lastName}" placeholder="Last Name"
